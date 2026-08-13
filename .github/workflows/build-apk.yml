@@ -1,3 +1,5 @@
+cd /workspaces/kelime_hafiza
+cat > .github/workflows/build-apk.yml << 'WORKFLOWEOF'
 name: Build APK
 
 on:
@@ -43,27 +45,13 @@ jobs:
             echo "android/ klasoru gecici scaffold'dan kopyalandi, lib/ ve pubspec.yaml dokunulmadi."
           fi
 
-      - name: Patch Kotlin/Android SDK versions (fixes known CI build-tools mismatch)
+      - name: Opt out of AGP 9 new DSL (Flutter compatibility fix, see flutter/flutter#175688)
         run: |
-          echo "--- oncesi ---"
-          cat android/settings.gradle 2>/dev/null || cat android/settings.gradle.kts 2>/dev/null
-          for f in android/settings.gradle android/settings.gradle.kts; do
-            if [ -f "$f" ]; then
-              sed -i -E 's/(org\.jetbrains\.kotlin\.android"?\)? version "?)[0-9]+\.[0-9]+\.[0-9]+/\11.9.24/' "$f"
-            fi
-          done
-          for f in android/app/build.gradle android/app/build.gradle.kts; do
-            if [ -f "$f" ]; then
-              sed -i -E 's/compileSdk[[:space:]]*=?[[:space:]]*flutter\.compileSdkVersion/compileSdk = 34/' "$f"
-              sed -i -E 's/targetSdk[[:space:]]*=?[[:space:]]*flutter\.targetSdkVersion/targetSdk = 34/' "$f"
-              sed -i -E 's/compileSdkVersion flutter\.compileSdkVersion/compileSdkVersion 34/' "$f"
-              sed -i -E 's/targetSdkVersion flutter\.targetSdkVersion/targetSdkVersion 34/' "$f"
-            fi
-          done
-          echo "--- sonrasi ---"
-          cat android/settings.gradle 2>/dev/null || cat android/settings.gradle.kts 2>/dev/null
-          echo "--- app/build.gradle sonrasi ---"
-          cat android/app/build.gradle 2>/dev/null || cat android/app/build.gradle.kts 2>/dev/null
+          echo "" >> android/gradle.properties
+          echo "android.newDsl=false" >> android/gradle.properties
+          echo "android.builtInKotlin=false" >> android/gradle.properties
+          echo "--- gradle.properties icerigi ---"
+          cat android/gradle.properties
 
       - name: Get dependencies
         run: flutter pub get
@@ -76,3 +64,7 @@ jobs:
         with:
           name: kelime-hafiza-apk
           path: flutter_app/build/app/outputs/flutter-apk/app-release.apk
+WORKFLOWEOF
+git add .github/workflows/build-apk.yml
+git commit -m "fix: AGP 9 newDsl uyumluluk sorunu"
+git push
