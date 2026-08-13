@@ -8,8 +8,21 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: flutter_app
     steps:
       - uses: actions/checkout@v4
+
+      - name: Sanity check - verify real app code is present
+        run: |
+          echo "== calisma dizini =="
+          pwd
+          ls -la
+          echo "== lib/main.dart ilk 10 satiri =="
+          head -10 lib/main.dart
+          grep -q "KelimeHafizaApp" lib/main.dart || (echo "!!! HATA: lib/main.dart beklenen Kelime Hafiza kodunu icermiyor, yanlis dosya yuklenmis olabilir." && exit 1)
+          echo "OK: dogru proje kodu bulundu."
 
       - uses: actions/setup-java@v4
         with:
@@ -20,31 +33,37 @@ jobs:
         with:
           channel: 'stable'
 
-      - name: Generate missing platform folders (android/ios) if absent
+      - name: Generate missing platform folders (android only, without touching app code)
         run: |
           if [ ! -d "android" ]; then
-            flutter create --platforms=android --org com.kelimehafiza --project-name kelime_hafiza .
+            TMP_SCAFFOLD=$(mktemp -d)
+            flutter create --platforms=android --org com.kelimehafiza --project-name kelime_hafiza "$TMP_SCAFFOLD/scaffold"
+            cp -r "$TMP_SCAFFOLD/scaffold/android" ./android
+            rm -rf "$TMP_SCAFFOLD"
+            echo "android/ klasoru gecici scaffold'dan kopyalandi, lib/ ve pubspec.yaml dokunulmadi."
           fi
 
       - name: Patch Kotlin/Android SDK versions (fixes known CI build-tools mismatch)
         run: |
-          echo "--- settings.gradle oncesi ---"
+          echo "--- oncesi ---"
           cat android/settings.gradle 2>/dev/null || cat android/settings.gradle.kts 2>/dev/null
           for f in android/settings.gradle android/settings.gradle.kts; do
             if [ -f "$f" ]; then
-              sed -i -E 's/(org\.jetbrains\.kotlin\.android"? version "?)[0-9]+\.[0-9]+\.[0-9]+/\11.9.24/' "$f"
+              sed -i -E 's/(org\.jetbrains\.kotlin\.android"?\)? version "?)[0-9]+\.[0-9]+\.[0-9]+/\11.9.24/' "$f"
             fi
           done
           for f in android/app/build.gradle android/app/build.gradle.kts; do
             if [ -f "$f" ]; then
-              sed -i -E 's/compileSdk( |=)flutter\.compileSdkVersion/compileSdk\g<1>34/' "$f"
+              sed -i -E 's/compileSdk[[:space:]]*=?[[:space:]]*flutter\.compileSdkVersion/compileSdk = 34/' "$f"
+              sed -i -E 's/targetSdk[[:space:]]*=?[[:space:]]*flutter\.targetSdkVersion/targetSdk = 34/' "$f"
               sed -i -E 's/compileSdkVersion flutter\.compileSdkVersion/compileSdkVersion 34/' "$f"
-              sed -i -E 's/targetSdk( |=)flutter\.targetSdkVersion/targetSdk\g<1>34/' "$f"
               sed -i -E 's/targetSdkVersion flutter\.targetSdkVersion/targetSdkVersion 34/' "$f"
             fi
           done
-          echo "--- settings.gradle sonrasi ---"
+          echo "--- sonrasi ---"
           cat android/settings.gradle 2>/dev/null || cat android/settings.gradle.kts 2>/dev/null
+          echo "--- app/build.gradle sonrasi ---"
+          cat android/app/build.gradle 2>/dev/null || cat android/app/build.gradle.kts 2>/dev/null
 
       - name: Get dependencies
         run: flutter pub get
@@ -56,4 +75,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: kelime-hafiza-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: flutter_app/build/app/outputs/flutter-apk/app-release.apk
