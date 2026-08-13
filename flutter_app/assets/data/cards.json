@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "english_word": "Laugh",
+    "turkish_meaning": "Gülmek",
+    "association_word": "Laf",
+    "mnemonic_sentence": "Her LAF'a gülmeyin! Düşünmeden söylenen her laf doğru olmayabilir.",
+    "image_file": "card_1.jpg",
+    "category": "Genel",
+    "difficulty": "medium"
+  },
+  {
+    "id": 2,
+    "english_word": "Arm",
+    "turkish_meaning": "Kol",
+    "association_word": "Arma",
+    "mnemonic_sentence": "Kolunda güzel arma olan gence arkadaşı bakıp: \"Kolundaki ARM'ayı beğendim harika!\" dedi.",
+    "image_file": "card_2.jpg",
+    "category": "İsimler",
+    "difficulty": "medium"
+  },
+  {
+    "id": 3,
+    "english_word": "Month",
+    "turkish_meaning": "Ay",
+    "association_word": "Mont",
+    "mnemonic_sentence": "Hava soğuk bu AY, herkes MONT'unu kırmızı giysin dedi patron.",
+    "image_file": "card_3.jpg",
+    "category": "İsimler",
+    "difficulty": "easy"
+  },
+  {
+    "id": 4,
+    "english_word": "Chef",
+    "turkish_meaning": "Aşçı",
+    "association_word": "Şef",
+    "mnemonic_sentence": "Aşçı sinirlendi ve ben şefinizim beni ŞEFFFFF diye çağıracaksınız dedi elemanlara!",
+    "image_file": "card_4.jpg",
+    "category": "İsimler",
+    "difficulty": "medium"
+  },
+  {
+    "id": 5,
+    "english_word": "Snake",
+    "turkish_meaning": "Yılan",
+    "association_word": "Sinek",
+    "mnemonic_sentence": "Ssss... SİNEK! diye düşündü yılan sinek görünce.",
+    "image_file": "card_5.jpg",
+    "category": "Genel",
+    "difficulty": "easy"
+  },
+  {
+    "id": 6,
+    "english_word": "Uncle",
+    "turkish_meaning": "Amca",
+    "association_word": "En kıl",
+    "mnemonic_sentence": "Amcan hangisi? EN KILLI olan benim amcam.",
+    "image_file": "card_6.jpg",
+    "category": "İsimler",
+    "difficulty": "medium"
+  }
+]
