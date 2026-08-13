@@ -32,10 +32,6 @@ class KelimeHafizaApp extends StatelessWidget {
           elevation: 0,
           centerTitle: true,
         ),
-        cardTheme: CardTheme(
-          elevation: 3,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-        ),
       ),
       home: const HomeScreen(),
     );

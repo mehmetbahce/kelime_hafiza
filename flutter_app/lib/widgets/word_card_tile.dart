@@ -17,6 +17,8 @@ class WordCardTile extends StatelessWidget {
 
     return Card(
       clipBehavior: Clip.antiAlias,
+      elevation: 3,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       child: InkWell(
         onTap: () {
           Navigator.push(
