@@ -1,10 +1,8 @@
-cd /workspaces/kelime_hafiza
-cat > .github/workflows/build-apk.yml << 'WORKFLOWEOF'
 name: Build APK
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch: {}
 
 jobs:
@@ -16,15 +14,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Sanity check - verify real app code is present
+      - name: Sanity check
         run: |
-          echo "== calisma dizini =="
           pwd
           ls -la
-          echo "== lib/main.dart ilk 10 satiri =="
           head -10 lib/main.dart
-          grep -q "KelimeHafizaApp" lib/main.dart || (echo "!!! HATA: lib/main.dart beklenen Kelime Hafiza kodunu icermiyor, yanlis dosya yuklenmis olabilir." && exit 1)
-          echo "OK: dogru proje kodu bulundu."
+          grep -q "KelimeHafizaApp" lib/main.dart || (echo "HATA: yanlis kod" && exit 1)
+          echo "OK"
 
       - uses: actions/setup-java@v4
         with:
@@ -35,23 +31,19 @@ jobs:
         with:
           channel: 'stable'
 
-      - name: Generate missing platform folders (android only, without touching app code)
+      - name: Generate android folder
         run: |
           if [ ! -d "android" ]; then
             TMP_SCAFFOLD=$(mktemp -d)
             flutter create --platforms=android --org com.kelimehafiza --project-name kelime_hafiza "$TMP_SCAFFOLD/scaffold"
             cp -r "$TMP_SCAFFOLD/scaffold/android" ./android
             rm -rf "$TMP_SCAFFOLD"
-            echo "android/ klasoru gecici scaffold'dan kopyalandi, lib/ ve pubspec.yaml dokunulmadi."
           fi
 
-      - name: Opt out of AGP 9 new DSL (Flutter compatibility fix, see flutter/flutter#175688)
+      - name: AGP 9 fix
         run: |
-          echo "" >> android/gradle.properties
           echo "android.newDsl=false" >> android/gradle.properties
           echo "android.builtInKotlin=false" >> android/gradle.properties
-          echo "--- gradle.properties icerigi ---"
-          cat android/gradle.properties
 
       - name: Get dependencies
         run: flutter pub get
@@ -64,7 +56,3 @@ jobs:
         with:
           name: kelime-hafiza-apk
           path: flutter_app/build/app/outputs/flutter-apk/app-release.apk
-WORKFLOWEOF
-git add .github/workflows/build-apk.yml
-git commit -m "fix: AGP 9 newDsl uyumluluk sorunu"
-git push
