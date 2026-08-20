@@ -1,9 +1,10 @@
+
 name: Build APK
 
-on:
+"on":
   push:
-    branches: [ main ]
-  workflow_dispatch: {}   # Actions sekmesinden manuel de tetikleyebilirsin
+    branches: [main]
+  workflow_dispatch: {}
 
 jobs:
   build:
