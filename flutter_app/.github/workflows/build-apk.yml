@@ -1,0 +1,64 @@
+name: Build APK
+
+"on":
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: flutter_app
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sanity check - verify real app code is present
+        run: |
+          echo "== calisma dizini =="
+          pwd
+          ls -la
+          echo "== lib/main.dart ilk 10 satiri =="
+          head -10 lib/main.dart
+          grep -q "KelimeHafizaApp" lib/main.dart || (echo "!!! HATA: lib/main.dart beklenen Kelime Hafiza kodunu icermiyor, yanlis dosya yuklenmis olabilir." && exit 1)
+          echo "OK: dogru proje kodu bulundu."
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Generate missing platform folders (android only, without touching app code)
+        run: |
+          if [ ! -d "android" ]; then
+            TMP_SCAFFOLD=$(mktemp -d)
+            flutter create --platforms=android --org com.kelimehafiza --project-name kelime_hafiza "$TMP_SCAFFOLD/scaffold"
+            cp -r "$TMP_SCAFFOLD/scaffold/android" ./android
+            rm -rf "$TMP_SCAFFOLD"
+            echo "android/ klasoru gecici scaffold'dan kopyalandi, lib/ ve pubspec.yaml dokunulmadi."
+          fi
+
+      - name: Opt out of AGP 9 new DSL (Flutter compatibility fix, see flutter/flutter#175688)
+        run: |
+          echo "" >> android/gradle.properties
+          echo "android.newDsl=false" >> android/gradle.properties
+          echo "android.builtInKotlin=false" >> android/gradle.properties
+          echo "--- gradle.properties icerigi ---"
+          cat android/gradle.properties
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Build release APK
+        run: flutter build apk --release
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: kelime-hafiza-apk
+          path: flutter_app/build/app/outputs/flutter-apk/app-release.apk

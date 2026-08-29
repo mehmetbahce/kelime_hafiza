@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/word_card.dart';
+import '../services/tts_service.dart';
 
 class CardDetailScreen extends StatelessWidget {
   final WordCard card;
@@ -38,12 +39,16 @@ class CardDetailScreen extends StatelessWidget {
                       children: [
                         Stack(
                           children: [
-                            if (card.imageAsset != null)
-                              Image.asset(card.imageAsset!, width: double.infinity, height: 170, fit: BoxFit.cover)
-                            else if (card.imageUrl != null)
-                              Image.network(card.imageUrl!, width: double.infinity, height: 170, fit: BoxFit.cover)
-                            else
-                              Container(height: 170, color: catColor.withOpacity(.15)),
+                            Container(
+                              width: double.infinity,
+                              height: 220,
+                              color: catColor.withOpacity(.08),
+                              child: card.imageAsset != null
+                                  ? Image.asset(card.imageAsset!, fit: BoxFit.contain)
+                                  : card.imageUrl != null
+                                      ? Image.network(card.imageUrl!, fit: BoxFit.contain)
+                                      : null,
+                            ),
                             Positioned(
                               top: 10, right: 10,
                               child: GestureDetector(
@@ -62,7 +67,20 @@ class CardDetailScreen extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(card.englishWord, style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w900)),
+                              Row(
+                                children: [
+                                  Text(card.englishWord, style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w900)),
+                                  const SizedBox(width: 8),
+                                  GestureDetector(
+                                    onTap: () => TtsService().speak(card.englishWord),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(color: catColor.withOpacity(.15), shape: BoxShape.circle),
+                                      child: Icon(Icons.volume_up_rounded, color: catColor, size: 22),
+                                    ),
+                                  ),
+                                ],
+                              ),
                               Text('= ${card.turkishMeaning}',
                                   style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: Color(0xFFC9971A))),
                               const SizedBox(height: 14),

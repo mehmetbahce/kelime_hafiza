@@ -38,16 +38,19 @@ class WordCardTile extends StatelessWidget {
             Expanded(
               child: Hero(
                 tag: 'card_${card.id}',
-                child: card.imageAsset != null
-                    ? Image.asset(card.imageAsset!, fit: BoxFit.cover)
-                    : card.imageUrl != null
-                        ? CachedNetworkImage(
-                            imageUrl: card.imageUrl!,
-                            fit: BoxFit.cover,
-                            errorWidget: (_, __, ___) => _placeholder(catColor),
-                            placeholder: (_, __) => Container(color: Colors.grey.shade200),
-                          )
-                        : _placeholder(catColor),
+                child: Container(
+                  color: catColor.withOpacity(.08),
+                  child: card.imageAsset != null
+                      ? Image.asset(card.imageAsset!, fit: BoxFit.contain)
+                      : card.imageUrl != null
+                          ? CachedNetworkImage(
+                              imageUrl: card.imageUrl!,
+                              fit: BoxFit.contain,
+                              errorWidget: (_, __, ___) => _placeholder(catColor),
+                              placeholder: (_, __) => Container(color: Colors.grey.shade200),
+                            )
+                          : _placeholder(catColor),
+                ),
               ),
             ),
             Padding(

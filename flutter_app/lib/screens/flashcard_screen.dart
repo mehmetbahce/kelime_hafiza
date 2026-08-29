@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../models/word_card.dart';
 import '../services/api_service.dart';
+import '../services/tts_service.dart';
 
 class FlashcardScreen extends StatefulWidget {
   final List<WordCard> cards;
@@ -104,8 +105,22 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(card.englishWord,
-              style: const TextStyle(fontSize: 40, fontWeight: FontWeight.w900, color: Color(0xFF1A1A1A))),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(card.englishWord,
+                  style: const TextStyle(fontSize: 40, fontWeight: FontWeight.w900, color: Color(0xFF1A1A1A))),
+              const SizedBox(width: 8),
+              GestureDetector(
+                onTap: () => TtsService().speak(card.englishWord),
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(color: const Color(0xFFF5C518).withOpacity(.25), shape: BoxShape.circle),
+                  child: const Icon(Icons.volume_up_rounded, color: Color(0xFFC9971A), size: 24),
+                ),
+              ),
+            ],
+          ),
           const SizedBox(height: 12),
           Text('Anlamını hatırlıyor musun?', style: TextStyle(color: Colors.grey.shade600)),
         ],
@@ -122,16 +137,26 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
             if (card.imageAsset != null)
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.asset(card.imageAsset!, height: 140, fit: BoxFit.cover),
+                child: Image.asset(card.imageAsset!, height: 200, fit: BoxFit.contain),
               )
             else if (card.imageUrl != null)
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: CachedNetworkImage(imageUrl: card.imageUrl!, height: 140, fit: BoxFit.cover,
+                child: CachedNetworkImage(imageUrl: card.imageUrl!, height: 200, fit: BoxFit.contain,
                     errorWidget: (_, __, ___) => const SizedBox.shrink()),
               ),
             const SizedBox(height: 12),
-            Text(card.englishWord, style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w900)),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(card.englishWord, style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w900)),
+                const SizedBox(width: 6),
+                GestureDetector(
+                  onTap: () => TtsService().speak(card.englishWord),
+                  child: const Icon(Icons.volume_up_rounded, color: Color(0xFFC9971A), size: 22),
+                ),
+              ],
+            ),
             Text('= ${card.turkishMeaning}',
                 style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: Color(0xFFC9971A))),
             const SizedBox(height: 12),
