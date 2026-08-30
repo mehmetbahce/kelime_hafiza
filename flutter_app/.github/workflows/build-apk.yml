@@ -66,6 +66,15 @@ jobs:
           echo "--- app/build.gradle sonrasi ---"
           cat android/app/build.gradle 2>/dev/null || cat android/app/build.gradle.kts 2>/dev/null
 
+      - name: Pin Gradle wrapper version (AGP 8.7.2 ile uyumlu, google_mobile_ads Gradle 9+ ile calismiyor)
+        run: |
+          GRADLE_PROPS=android/gradle/wrapper/gradle-wrapper.properties
+          echo "--- oncesi ---"
+          cat "$GRADLE_PROPS"
+          sed -i -E 's#(distributionUrl=.*gradle-)[0-9]+\.[0-9]+(\.[0-9]+)?(-all\.zip)#\18.9\3#' "$GRADLE_PROPS"
+          echo "--- sonrasi ---"
+          cat "$GRADLE_PROPS"
+
       - name: Add AdMob test App ID to AndroidManifest.xml
         run: |
           MANIFEST=android/app/src/main/AndroidManifest.xml
