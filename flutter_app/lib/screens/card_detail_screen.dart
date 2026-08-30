@@ -2,15 +2,31 @@ import 'package:flutter/material.dart';
 import '../models/word_card.dart';
 import '../services/tts_service.dart';
 
-class CardDetailScreen extends StatelessWidget {
+class CardDetailScreen extends StatefulWidget {
   final WordCard card;
   const CardDetailScreen({super.key, required this.card});
 
   @override
+  State<CardDetailScreen> createState() => _CardDetailScreenState();
+}
+
+class _CardDetailScreenState extends State<CardDetailScreen> {
+  final PageController _imgController = PageController();
+  int _imgIndex = 0;
+
+  @override
+  void dispose() {
+    _imgController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final card = widget.card;
     final catColor = card.categoryColor != null
         ? Color(int.parse(card.categoryColor!.replaceFirst('#', '0xFF')))
         : const Color(0xFFF5C518);
+    final images = card.allImageAssets;
 
     return Scaffold(
       backgroundColor: Colors.black54,
@@ -26,7 +42,7 @@ class CardDetailScreen extends StatelessWidget {
                 color: Colors.transparent,
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.86,
-                  constraints: const BoxConstraints(maxHeight: 560),
+                  constraints: const BoxConstraints(maxHeight: 620),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(24),
@@ -43,12 +59,50 @@ class CardDetailScreen extends StatelessWidget {
                               width: double.infinity,
                               height: 220,
                               color: catColor.withOpacity(.08),
-                              child: card.imageAsset != null
-                                  ? Image.asset(card.imageAsset!, fit: BoxFit.contain)
-                                  : card.imageUrl != null
-                                      ? Image.network(card.imageUrl!, fit: BoxFit.contain)
-                                      : null,
+                              child: images.isEmpty
+                                  ? null
+                                  : images.length == 1
+                                      ? Image.asset(images.first, fit: BoxFit.contain)
+                                      : PageView.builder(
+                                          controller: _imgController,
+                                          itemCount: images.length,
+                                          onPageChanged: (i) => setState(() => _imgIndex = i),
+                                          itemBuilder: (_, i) => Image.asset(images[i], fit: BoxFit.contain),
+                                        ),
                             ),
+                            if (images.length > 1)
+                              Positioned(
+                                bottom: 10,
+                                left: 0,
+                                right: 0,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: List.generate(images.length, (i) {
+                                    final active = i == _imgIndex;
+                                    return AnimatedContainer(
+                                      duration: const Duration(milliseconds: 200),
+                                      margin: const EdgeInsets.symmetric(horizontal: 3),
+                                      width: active ? 18 : 6,
+                                      height: 6,
+                                      decoration: BoxDecoration(
+                                        color: active ? catColor : Colors.white,
+                                        borderRadius: BorderRadius.circular(4),
+                                        boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 2)],
+                                      ),
+                                    );
+                                  }),
+                                ),
+                              ),
+                            if (images.length > 1)
+                              Positioned(
+                                top: 10, left: 10,
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                  decoration: BoxDecoration(color: Colors.black45, borderRadius: BorderRadius.circular(10)),
+                                  child: Text('${_imgIndex + 1}/${images.length}',
+                                      style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold)),
+                                ),
+                              ),
                             Positioned(
                               top: 10, right: 10,
                               child: GestureDetector(

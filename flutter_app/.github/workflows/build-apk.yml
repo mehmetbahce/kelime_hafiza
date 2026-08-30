@@ -51,6 +51,20 @@ jobs:
           echo "--- gradle.properties icerigi ---"
           cat android/gradle.properties
 
+      - name: Add AdMob test App ID to AndroidManifest.xml
+        run: |
+          MANIFEST=android/app/src/main/AndroidManifest.xml
+          echo "--- AndroidManifest.xml oncesi ---"
+          cat "$MANIFEST"
+          # INTERNET izni yoksa ekle (uses-permission)
+          if ! grep -q "android.permission.INTERNET" "$MANIFEST"; then
+            sed -i '/<manifest xmlns:android/a\    <uses-permission android:name="android.permission.INTERNET"\/>' "$MANIFEST"
+          fi
+          # AdMob TEST uygulama ID'si (Google'in resmi test ID'si, gercek para/tiklama uretmez)
+          sed -i '/android:icon="@mipmap\/ic_launcher">/a\        <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-3940256099942544~3347511713"\/>' "$MANIFEST"
+          echo "--- AndroidManifest.xml sonrasi ---"
+          cat "$MANIFEST"
+
       - name: Get dependencies
         run: flutter pub get
 

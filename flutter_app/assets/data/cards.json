@@ -528,5 +528,125 @@
     "image_file": "card_53.jpg",
     "category": "Fiiller",
     "difficulty": "medium"
+  },
+  {
+    "id": 54,
+    "english_word": "Never",
+    "turkish_meaning": "Asla",
+    "association_word": "Ne var",
+    "mnemonic_sentence": "NE VAR! Para mı istiyorsun? ASLA! Sadece biraz sohbet edelim istedim.",
+    "image_file": "card_54.jpg",
+    "category": "Genel",
+    "difficulty": "medium"
+  },
+  {
+    "id": 55,
+    "english_word": "Cynical",
+    "turkish_meaning": "Eleştirel",
+    "association_word": "Sinek al",
+    "mnemonic_sentence": "ELEŞTİREL olmayı bırakta şu düğmeye bas ve biraz SİNEK AL!",
+    "image_file": "card_55.jpg",
+    "category": "Sıfatlar",
+    "difficulty": "hard"
+  },
+  {
+    "id": 56,
+    "english_word": "Why",
+    "turkish_meaning": "Neden",
+    "association_word": "Vay",
+    "mnemonic_sentence": "VAY! Elmayı NEDEN merdivene çıkıp toplamıyorsun!",
+    "image_file": "card_56.jpg",
+    "category": "Genel",
+    "difficulty": "easy"
+  },
+  {
+    "id": 57,
+    "english_word": "Wide",
+    "turkish_meaning": "Geniş",
+    "association_word": "Vay dede",
+    "mnemonic_sentence": "WAY DEDE bu şalvar çok GENİŞ!",
+    "image_file": "card_57.jpg",
+    "category": "Sıfatlar",
+    "difficulty": "medium"
+  },
+  {
+    "id": 58,
+    "english_word": "Easy",
+    "turkish_meaning": "Kolay",
+    "association_word": "İzi",
+    "mnemonic_sentence": "Büyüteç ile bu İZİ takip etmek çok KOLAY!",
+    "image_file": "card_58.jpg",
+    "category": "Sıfatlar",
+    "difficulty": "easy"
+  },
+  {
+    "id": 59,
+    "english_word": "Box",
+    "turkish_meaning": "Kutu",
+    "association_word": "Boks",
+    "mnemonic_sentence": "Bu BOKS maçı KUTU fırlatmak yasak!",
+    "image_file": "card_59.jpg",
+    "category": "İsimler",
+    "difficulty": "easy"
+  },
+  {
+    "id": 60,
+    "english_word": "Out",
+    "turkish_meaning": "Dışarı",
+    "association_word": "Out",
+    "mnemonic_sentence": "Top DIŞARI çıktı OUT!",
+    "image_file": "card_60.jpg",
+    "category": "Genel",
+    "difficulty": "easy"
+  },
+  {
+    "id": 61,
+    "english_word": "Dinner",
+    "turkish_meaning": "Akşam yemeği",
+    "association_word": "Diner",
+    "mnemonic_sentence": "Karnım acıktı ve gurulduyor! Birazdan AKŞAM YEMEĞİ yediğinde DİNER o guruldama!",
+    "image_file": "card_61.jpg",
+    "category": "İsimler",
+    "difficulty": "medium"
+  },
+  {
+    "id": 62,
+    "english_word": "Table",
+    "turkish_meaning": "Masa",
+    "association_word": "Teyibi al",
+    "mnemonic_sentence": "TEYİBİ AL! Bak MASA'nın hemen üzerinde!",
+    "image_file": "card_62.jpg",
+    "category": "İsimler",
+    "difficulty": "easy"
+  },
+  {
+    "id": 63,
+    "english_word": "Bus",
+    "turkish_meaning": "Otobüs",
+    "association_word": "Bas",
+    "mnemonic_sentence": "OTOBÜS'ten inmek için lütfen düğmeye BAS!",
+    "image_file": "card_63.jpg",
+    "category": "İsimler",
+    "difficulty": "easy"
+  },
+  {
+    "id": 64,
+    "english_word": "Narrow",
+    "turkish_meaning": "Dar",
+    "association_word": "Narı ov",
+    "mnemonic_sentence": "Al şu NARI OV, iyi gelir DAR giysiden sonra! Rahatlarsın.",
+    "image_file": "card_64.jpg",
+    "category": "Sıfatlar",
+    "difficulty": "hard"
+  },
+  {
+    "id": 65,
+    "english_word": "Bet",
+    "turkish_meaning": "Bahse girmek",
+    "association_word": "Beti",
+    "mnemonic_sentence": "BETİ gel seninle BAHSE GİRELİM!",
+    "image_file": "card_65.jpg",
+    "category": "Fiiller",
+    "difficulty": "medium"
   }
 ]

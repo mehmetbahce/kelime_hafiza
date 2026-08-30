@@ -4,8 +4,9 @@ class WordCard {
   final String turkishMeaning;
   final String associationWord;
   final String mnemonicSentence;
-  final String? imageUrl;    // sunucudan gelen görsel (backend modu)
-  final String? imageAsset;  // uygulama içine gömülü görsel (test/offline modu)
+  final String? imageUrl;    // sunucudan gelen tek görsel (backend modu)
+  final String? imageAsset;  // uygulama içine gömülü tek görsel (test/offline modu)
+  final List<String> imageAssets; // birden fazla görsel (kart detayında kaydırmalı galeri)
   final int? categoryId;
   final String? categoryName;
   final String? categoryColor;
@@ -22,6 +23,7 @@ class WordCard {
     required this.mnemonicSentence,
     this.imageUrl,
     this.imageAsset,
+    this.imageAssets = const [],
     this.categoryId,
     this.categoryName,
     this.categoryColor,
@@ -31,7 +33,19 @@ class WordCard {
     this.nextReviewDate,
   });
 
+  /// Kart detayında gösterilecek tüm görseller (öncelik: imageAssets listesi,
+  /// yoksa tekil imageAsset'i tek elemanlı liste yapar).
+  List<String> get allImageAssets {
+    if (imageAssets.isNotEmpty) return imageAssets;
+    if (imageAsset != null) return [imageAsset!];
+    return [];
+  }
+
   factory WordCard.fromJson(Map<String, dynamic> json) {
+    List<String> assets = [];
+    if (json['image_files'] is List) {
+      assets = List<String>.from(json['image_files']).map((f) => 'assets/images/$f').toList();
+    }
     return WordCard(
       id: int.parse(json['id'].toString()),
       englishWord: json['english_word'] ?? '',
@@ -39,6 +53,7 @@ class WordCard {
       associationWord: json['association_word'] ?? '',
       mnemonicSentence: json['mnemonic_sentence'] ?? '',
       imageUrl: json['image_url'],
+      imageAssets: assets,
       categoryId: json['category_id'] != null ? int.tryParse(json['category_id'].toString()) : null,
       categoryName: json['category_name'],
       categoryColor: json['category_color'],

@@ -17,6 +17,12 @@ class CardLoader {
   }
 
   static WordCard _fromJson(Map<String, dynamic> j) {
+    // Yeni format: "image_files": ["a.jpg","b.jpg",...] (birden fazla görsel)
+    // Eski format: "image_file": "a.jpg" (tek görsel) — geriye dönük uyumluluk
+    List<String> assets = [];
+    if (j['image_files'] is List) {
+      assets = List<String>.from(j['image_files']).map((f) => 'assets/images/$f').toList();
+    }
     return WordCard(
       id: j['id'] as int,
       englishWord: j['english_word'] ?? '',
@@ -24,6 +30,7 @@ class CardLoader {
       associationWord: j['association_word'] ?? '',
       mnemonicSentence: j['mnemonic_sentence'] ?? '',
       imageAsset: j['image_file'] != null ? 'assets/images/${j['image_file']}' : null,
+      imageAssets: assets,
       categoryName: j['category'],
       difficulty: j['difficulty'] ?? 'medium',
     );
