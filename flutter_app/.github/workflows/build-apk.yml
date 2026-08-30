@@ -1,6 +1,6 @@
 name: Build APK
 
-"on":
+on:
   push:
     branches: [main]
   workflow_dispatch: {}
@@ -43,51 +43,13 @@ jobs:
             echo "android/ klasoru gecici scaffold'dan kopyalandi, lib/ ve pubspec.yaml dokunulmadi."
           fi
 
-      - name: Pin AGP/Kotlin to known-good versions (google_mobile_ads AGP9 uyumsuzlugu icin)
+      - name: Opt out of AGP 9 new DSL (Flutter compatibility fix, see flutter/flutter#175688)
         run: |
-          echo "--- oncesi ---"
-          cat android/settings.gradle 2>/dev/null || cat android/settings.gradle.kts 2>/dev/null
-          for f in android/settings.gradle android/settings.gradle.kts; do
-            if [ -f "$f" ]; then
-              sed -i -E 's/(com\.android\.application"?\)? version "?)[0-9]+\.[0-9]+\.[0-9]+/\18.7.2/' "$f"
-              sed -i -E 's/(org\.jetbrains\.kotlin\.android"?\)? version "?)[0-9]+\.[0-9]+\.[0-9]+/\12.1.0/' "$f"
-            fi
-          done
-          echo "--- sonrasi ---"
-          cat android/settings.gradle 2>/dev/null || cat android/settings.gradle.kts 2>/dev/null
-          for f in android/app/build.gradle android/app/build.gradle.kts; do
-            if [ -f "$f" ]; then
-              sed -i -E 's/compileSdk[[:space:]]*=?[[:space:]]*flutter\.compileSdkVersion/compileSdk = 34/' "$f"
-              sed -i -E 's/targetSdk[[:space:]]*=?[[:space:]]*flutter\.targetSdkVersion/targetSdk = 34/' "$f"
-              sed -i -E 's/compileSdkVersion flutter\.compileSdkVersion/compileSdkVersion 34/' "$f"
-              sed -i -E 's/targetSdkVersion flutter\.targetSdkVersion/targetSdkVersion 34/' "$f"
-            fi
-          done
-          echo "--- app/build.gradle sonrasi ---"
-          cat android/app/build.gradle 2>/dev/null || cat android/app/build.gradle.kts 2>/dev/null
-
-      - name: Pin Gradle wrapper version (AGP 8.7.2 ile uyumlu, google_mobile_ads Gradle 9+ ile calismiyor)
-        run: |
-          GRADLE_PROPS=android/gradle/wrapper/gradle-wrapper.properties
-          echo "--- oncesi ---"
-          cat "$GRADLE_PROPS"
-          sed -i -E 's#(distributionUrl=.*gradle-)[0-9]+\.[0-9]+(\.[0-9]+)?(-all\.zip)#\18.9\3#' "$GRADLE_PROPS"
-          echo "--- sonrasi ---"
-          cat "$GRADLE_PROPS"
-
-      - name: Add AdMob test App ID to AndroidManifest.xml
-        run: |
-          MANIFEST=android/app/src/main/AndroidManifest.xml
-          echo "--- AndroidManifest.xml oncesi ---"
-          cat "$MANIFEST"
-          # INTERNET izni yoksa ekle (uses-permission)
-          if ! grep -q "android.permission.INTERNET" "$MANIFEST"; then
-            sed -i '/<manifest xmlns:android/a\    <uses-permission android:name="android.permission.INTERNET"\/>' "$MANIFEST"
-          fi
-          # AdMob TEST uygulama ID'si (Google'in resmi test ID'si, gercek para/tiklama uretmez)
-          sed -i '/android:icon="@mipmap\/ic_launcher">/a\        <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-3940256099942544~3347511713"\/>' "$MANIFEST"
-          echo "--- AndroidManifest.xml sonrasi ---"
-          cat "$MANIFEST"
+          echo "" >> android/gradle.properties
+          echo "android.newDsl=false" >> android/gradle.properties
+          echo "android.builtInKotlin=false" >> android/gradle.properties
+          echo "--- gradle.properties icerigi ---"
+          cat android/gradle.properties
 
       - name: Get dependencies
         run: flutter pub get

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../models/word_card.dart';
 import '../data/card_loader.dart';
 import '../widgets/word_card_tile.dart';
-import '../widgets/banner_ad_widget.dart';
 import 'flashcard_screen.dart';
 import 'quiz_screen.dart';
 
@@ -81,7 +80,6 @@ class _HomeScreenState extends State<HomeScreen> {
           _buildSearchBar(),
           _buildCategoryChips(),
           Expanded(child: _buildBody(cards)),
-          const SafeArea(top: false, child: BannerAdWidget()),
         ],
       ),
     );
