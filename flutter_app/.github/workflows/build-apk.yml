@@ -43,13 +43,28 @@ jobs:
             echo "android/ klasoru gecici scaffold'dan kopyalandi, lib/ ve pubspec.yaml dokunulmadi."
           fi
 
-      - name: Opt out of AGP 9 new DSL (Flutter compatibility fix, see flutter/flutter#175688)
+      - name: Pin AGP/Kotlin to known-good versions (google_mobile_ads AGP9 uyumsuzlugu icin)
         run: |
-          echo "" >> android/gradle.properties
-          echo "android.newDsl=false" >> android/gradle.properties
-          echo "android.builtInKotlin=false" >> android/gradle.properties
-          echo "--- gradle.properties icerigi ---"
-          cat android/gradle.properties
+          echo "--- oncesi ---"
+          cat android/settings.gradle 2>/dev/null || cat android/settings.gradle.kts 2>/dev/null
+          for f in android/settings.gradle android/settings.gradle.kts; do
+            if [ -f "$f" ]; then
+              sed -i -E 's/(com\.android\.application"?\)? version "?)[0-9]+\.[0-9]+\.[0-9]+/\18.7.2/' "$f"
+              sed -i -E 's/(org\.jetbrains\.kotlin\.android"?\)? version "?)[0-9]+\.[0-9]+\.[0-9]+/\12.1.0/' "$f"
+            fi
+          done
+          echo "--- sonrasi ---"
+          cat android/settings.gradle 2>/dev/null || cat android/settings.gradle.kts 2>/dev/null
+          for f in android/app/build.gradle android/app/build.gradle.kts; do
+            if [ -f "$f" ]; then
+              sed -i -E 's/compileSdk[[:space:]]*=?[[:space:]]*flutter\.compileSdkVersion/compileSdk = 34/' "$f"
+              sed -i -E 's/targetSdk[[:space:]]*=?[[:space:]]*flutter\.targetSdkVersion/targetSdk = 34/' "$f"
+              sed -i -E 's/compileSdkVersion flutter\.compileSdkVersion/compileSdkVersion 34/' "$f"
+              sed -i -E 's/targetSdkVersion flutter\.targetSdkVersion/targetSdkVersion 34/' "$f"
+            fi
+          done
+          echo "--- app/build.gradle sonrasi ---"
+          cat android/app/build.gradle 2>/dev/null || cat android/app/build.gradle.kts 2>/dev/null
 
       - name: Add AdMob test App ID to AndroidManifest.xml
         run: |
