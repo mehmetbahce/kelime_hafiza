@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kelime Hafıza — Önizleme</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+  :root{
+    --yellow:#F5C518;
+    --yellow-soft:#FFF6D9;
+    --dark:#1A1A1A;
+    --bg:#FAF7F0;
+    --ink:#2A2A2A;
+    --muted:#8A8272;
+    --red:#E5484D;
+    --orange:#F0883E;
+    --blue:#3E8EF0;
+    --green:#3EBD6E;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:'Nunito',sans-serif; background:#EDEAE2;
+    display:flex; flex-direction:column; align-items:center; gap:28px;
+    padding:40px 16px 80px;
+    background-image: radial-gradient(circle at 1px 1px, #DAD5C8 1px, transparent 0);
+    background-size: 22px 22px;
+  }
+  h1{font-size:22px; color:var(--dark); margin:0 0 4px;}
+  .sub{color:var(--muted); font-size:14px; margin-bottom:8px;}
+  .tabs{display:flex; gap:8px; background:#fff; padding:6px; border-radius:14px; box-shadow:0 4px 14px rgba(0,0,0,.08); position:sticky; top:14px; z-index:50;}
+  .tab{padding:9px 16px; border-radius:10px; font-weight:800; font-size:13px; cursor:pointer; color:var(--muted); user-select:none; transition:.15s;}
+  .tab.active{background:var(--yellow); color:var(--dark);}
+
+  .phone{
+    width:320px; height:660px; background:#000; border-radius:42px; padding:12px;
+    box-shadow:0 20px 50px rgba(0,0,0,.35), inset 0 0 0 2px #333;
+    position:relative;
+  }
+  .notch{
+    position:absolute; top:12px; left:50%; transform:translateX(-50%);
+    width:120px; height:22px; background:#000; border-radius:0 0 16px 16px; z-index:10;
+  }
+  .screen{
+    width:100%; height:100%; background:var(--bg); border-radius:32px; overflow:hidden;
+    display:flex; flex-direction:column; position:relative;
+  }
+  .screenset{display:none;}
+  .screenset.active{display:flex; flex-direction:column; height:100%;}
+
+  /* ---- Top bar ---- */
+  .appbar{background:var(--dark); color:#fff; padding:16px 16px 12px; display:flex; align-items:center; justify-content:space-between;}
+  .appbar .title{font-weight:900; font-size:16px; letter-spacing:.2px;}
+  .appbar .icons{display:flex; gap:14px; font-size:17px;}
+
+  /* ---- Gallery ---- */
+  .searchbar{margin:12px 14px 6px; background:#fff; border-radius:12px; padding:10px 12px; display:flex; align-items:center; gap:8px; box-shadow:0 2px 6px rgba(0,0,0,.06); font-size:13px; color:var(--muted);}
+  .chips{display:flex; gap:8px; padding:6px 14px 10px; overflow-x:auto;}
+  .chip{flex:0 0 auto; padding:7px 13px; border-radius:20px; background:#fff; font-size:12px; font-weight:700; color:var(--muted); box-shadow:0 1px 4px rgba(0,0,0,.06);}
+  .chip.sel{background:var(--yellow); color:var(--dark);}
+  .grid{flex:1; overflow-y:auto; display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:6px 14px 90px;}
+  .gcard{background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 3px 10px rgba(0,0,0,.08); display:flex; flex-direction:column;}
+  .gcard .img{height:78px; background-size:cover; background-position:center;}
+  .gcard .info{padding:8px 9px 10px;}
+  .gcard .en{font-weight:900; font-size:13px; color:var(--dark);}
+  .gcard .tr{font-size:11.5px; color:var(--muted); margin:1px 0 6px;}
+  .bar{height:4px; border-radius:3px; background:#eee; overflow:hidden;}
+  .bar i{display:block; height:100%; border-radius:3px;}
+  .fab{position:absolute; bottom:18px; right:16px; background:var(--dark); color:var(--yellow); border-radius:26px; padding:12px 18px; font-weight:800; font-size:12.5px; box-shadow:0 6px 16px rgba(0,0,0,.3); display:flex; align-items:center; gap:6px;}
+
+  /* ---- Flashcard ---- */
+  .fc-wrap{flex:1; background:var(--dark); display:flex; flex-direction:column;}
+  .fc-appbar{background:transparent; color:#fff;}
+  .progress{height:4px; background:rgba(255,255,255,.15);}
+  .progress i{display:block; height:100%; width:40%; background:var(--yellow);}
+  .fc-card{flex:1; display:flex; align-items:center; justify-content:center; padding:20px;}
+  .card-face{
+    background:#fff; border-radius:22px; padding:24px 20px; width:100%; text-align:center;
+    box-shadow:0 12px 30px rgba(0,0,0,.4);
+  }
+  .card-face .big{font-size:32px; font-weight:900; color:var(--dark);}
+  .card-face .hint{color:var(--muted); font-size:12.5px; margin-top:10px;}
+  .card-back .eq{font-size:20px; font-weight:800; color:#C9971A; margin:4px 0 12px;}
+  .card-back .assoc-box{background:var(--yellow-soft); border-radius:12px; padding:12px; margin-top:10px;}
+  .card-back .assoc-box b{font-size:12.5px;}
+  .card-back .assoc-box p{font-size:12.5px; margin:6px 0 0; color:#5b5443;}
+  .fc-hint{color:#fff8; text-align:center; padding:16px; font-size:12px;}
+  .fc-buttons{display:flex; gap:8px; padding:0 14px 22px;}
+  .fc-btn{flex:1; padding:12px 0; border-radius:12px; color:#fff; font-weight:800; font-size:12px; text-align:center;}
+
+  /* ---- Quiz ---- */
+  .quiz-wrap{flex:1; display:flex; flex-direction:column; padding:20px 18px;}
+  .quiz-progress{height:5px; background:#eee; border-radius:4px; overflow:hidden; margin-bottom:26px;}
+  .quiz-progress i{display:block; height:100%; width:30%; background:var(--yellow);}
+  .quiz-q{font-weight:800; font-size:17px; text-align:center; color:var(--dark); margin-bottom:26px; line-height:1.4;}
+  .quiz-opt{padding:14px; border-radius:12px; background:#fff; box-shadow:0 2px 8px rgba(0,0,0,.06); font-weight:700; font-size:13.5px; margin-bottom:10px; color:var(--ink); text-align:center;}
+  .quiz-opt.correct{background:var(--green); color:#fff;}
+  .quiz-opt.wrong{background:var(--red); color:#fff;}
+
+  .caption{max-width:320px; text-align:center; color:var(--muted); font-size:12.5px; margin-top:-14px;}
+</style>
+</head>
+<body>
+
+<h1>🧠 Kelime Hafıza</h1>
+<div class="sub">Melih Duyar tarzı çağrışım kartları — Flutter app önizlemesi</div>
+
+<div class="tabs">
+  <div class="tab active" data-t="gallery">📚 Galeri</div>
+  <div class="tab" data-t="flash">🔄 Tekrar Modu</div>
+  <div class="tab" data-t="quiz">📝 Quiz</div>
+</div>
+
+<div class="phone">
+  <div class="notch"></div>
+  <div class="screen">
+
+    <!-- GALLERY -->
+    <div class="screenset active" id="gallery">
+      <div class="appbar">
+        <div class="title">Kelime Hafıza</div>
+        <div class="icons">🎓 📝</div>
+      </div>
+      <div class="searchbar">🔍 Kelime, anlam veya çağrışım ara...</div>
+      <div class="chips">
+        <div class="chip sel">Tümü</div>
+        <div class="chip">Genel (1)</div>
+        <div class="chip">İsimler (3)</div>
+        <div class="chip">Deyimler (2)</div>
+      </div>
+      <div class="grid">
+        <div class="gcard">
+          <div class="img" style="background-image:url('preview_imgs/laugh.jpg');"></div>
+          <div class="info"><div class="en">Laugh</div><div class="tr">Gülmek</div><div class="bar"><i style="width:80%;background:#F5C518;"></i></div></div>
+        </div>
+        <div class="gcard">
+          <div class="img" style="background-image:url('preview_imgs/arm.jpg');"></div>
+          <div class="info"><div class="en">Arm</div><div class="tr">Kol</div><div class="bar"><i style="width:45%;background:#3E8EF0;"></i></div></div>
+        </div>
+        <div class="gcard">
+          <div class="img" style="background-image:url('preview_imgs/month.jpg');"></div>
+          <div class="info"><div class="en">Month</div><div class="tr">Ay</div><div class="bar"><i style="width:65%;background:#E91E63;"></i></div></div>
+        </div>
+        <div class="gcard">
+          <div class="img" style="background-image:url('preview_imgs/chef.jpg');"></div>
+          <div class="info"><div class="en">Chef</div><div class="tr">Aşçı</div><div class="bar"><i style="width:30%;background:#9C27B0;"></i></div></div>
+        </div>
+        <div class="gcard">
+          <div class="img" style="background-image:url('preview_imgs/snake.jpg');"></div>
+          <div class="info"><div class="en">Snake</div><div class="tr">Yılan</div><div class="bar"><i style="width:90%;background:#4CAF50;"></i></div></div>
+        </div>
+        <div class="gcard">
+          <div class="img" style="background-image:url('preview_imgs/uncle.jpg');"></div>
+          <div class="info"><div class="en">Uncle</div><div class="tr">Amca</div><div class="bar"><i style="width:55%;background:#E91E63;"></i></div></div>
+        </div>
+      </div>
+      <div class="fab">＋ Kart Ekle</div>
+    </div>
+
+    <!-- FLASHCARD -->
+    <div class="screenset" id="flash">
+      <div class="fc-wrap">
+        <div class="appbar fc-appbar"><div class="title">3 / 6</div><div></div></div>
+        <div class="progress"><i></i></div>
+        <div class="fc-card">
+          <div class="card-face card-back">
+            <img src="preview_imgs/month.jpg" style="width:100%;border-radius:12px;margin-bottom:12px;">
+            <div class="big" style="font-size:24px;">Month</div>
+            <div class="eq">= Ay</div>
+            <div class="assoc-box">
+              <b>Çağrışım: Mont</b>
+              <p>Hava soğuk bu AY, herkes MONT'unu kırmızı giysin dedi patron.</p>
+            </div>
+          </div>
+        </div>
+        <div class="fc-buttons">
+          <div class="fc-btn" style="background:var(--red);">Tekrar</div>
+          <div class="fc-btn" style="background:var(--orange);">Zor</div>
+          <div class="fc-btn" style="background:var(--blue);">İyi</div>
+          <div class="fc-btn" style="background:var(--green);">Kolay</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="screenset" id="quiz">
+      <div class="appbar"><div class="title">Soru 4 / 10</div><div></div></div>
+      <div class="quiz-wrap">
+        <div class="quiz-progress"><i></i></div>
+        <div class="quiz-q">"Snake" kelimesinin anlamı nedir?</div>
+        <div class="quiz-opt">Aşçı</div>
+        <div class="quiz-opt correct">Yılan</div>
+        <div class="quiz-opt wrong">Kol</div>
+        <div class="quiz-opt">Amca</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="caption">Sağ üstteki 🎓 tekrar moduna, 📝 quiz moduna götürür. Kartlara uzun basınca silme menüsü açılır.</div>
+
+<script>
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.screenset').forEach(s=>s.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.t).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
