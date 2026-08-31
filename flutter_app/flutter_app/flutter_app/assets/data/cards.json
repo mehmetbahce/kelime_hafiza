@@ -1,0 +1,652 @@
+[
+  {
+    "id": 1,
+    "english_word": "Laugh",
+    "turkish_meaning": "Gülmek",
+    "association_word": "Laf",
+    "mnemonic_sentence": "Her LAF'a gülmeyin! Düşünmeden söylenen her laf doğru olmayabilir.",
+    "image_file": "card_1.jpg",
+    "category": "Genel",
+    "difficulty": "medium"
+  },
+  {
+    "id": 2,
+    "english_word": "Arm",
+    "turkish_meaning": "Kol",
+    "association_word": "Arma",
+    "mnemonic_sentence": "Kolunda güzel arma olan gence arkadaşı bakıp: \"Kolundaki ARM'ayı beğendim harika!\" dedi.",
+    "image_file": "card_2.jpg",
+    "category": "İsimler",
+    "difficulty": "medium"
+  },
+  {
+    "id": 3,
+    "english_word": "Month",
+    "turkish_meaning": "Ay",
+    "association_word": "Mont",
+    "mnemonic_sentence": "Hava soğuk bu AY, herkes MONT'unu kırmızı giysin dedi patron.",
+    "image_file": "card_3.jpg",
+    "category": "İsimler",
+    "difficulty": "easy"
+  },
+  {
+    "id": 4,
+    "english_word": "Chef",
+    "turkish_meaning": "Aşçı",
+    "association_word": "Şef",
+    "mnemonic_sentence": "Aşçı sinirlendi ve ben şefinizim beni ŞEFFFFF diye çağıracaksınız dedi elemanlara!",
+    "image_file": "card_4.jpg",
+    "category": "İsimler",
+    "difficulty": "medium"
+  },
+  {
+    "id": 5,
+    "english_word": "Snake",
+    "turkish_meaning": "Yılan",
+    "association_word": "Sinek",
+    "mnemonic_sentence": "Ssss... SİNEK! diye düşündü yılan sinek görünce.",
+    "image_file": "card_5.jpg",
+    "category": "Genel",
+    "difficulty": "easy"
+  },
+  {
+    "id": 6,
+    "english_word": "Uncle",
+    "turkish_meaning": "Amca",
+    "association_word": "En kıl",
+    "mnemonic_sentence": "Amcan hangisi? EN KILLI olan benim amcam.",
+    "image_file": "card_6.jpg",
+    "category": "İsimler",
+    "difficulty": "medium"
+  },
+  {
+    "id": 7,
+    "english_word": "River",
+    "turkish_meaning": "Nehir",
+    "association_word": "Revir",
+    "mnemonic_sentence": "REVİR NEHİR bitişiğinde hemen. İşte orası.",
+    "image_file": "card_7.jpg",
+    "category": "İsimler",
+    "difficulty": "medium"
+  },
+  {
+    "id": 8,
+    "english_word": "Cheap",
+    "turkish_meaning": "Ucuz",
+    "association_word": "Çip",
+    "mnemonic_sentence": "Buyurun bundan alın. Bu ÇİP UCUZ diğerlerine göre.",
+    "image_file": "card_8.jpg",
+    "category": "Sıfatlar",
+    "difficulty": "medium"
+  },
+  {
+    "id": 9,
+    "english_word": "Very",
+    "turkish_meaning": "Çok",
+    "association_word": "Veri",
+    "mnemonic_sentence": "İşte bu diğerlerinden ÇOK VERİ saklar.",
+    "image_file": "card_9.jpg",
+    "category": "Genel",
+    "difficulty": "medium"
+  },
+  {
+    "id": 10,
+    "english_word": "Cheese",
+    "turkish_meaning": "Peynir",
+    "association_word": "Çiz",
+    "mnemonic_sentence": "Çİz dediniz, ben de PEYNİR ÇİZ'dim. Acıktım belki ondan.",
+    "image_file": "card_10.jpg",
+    "category": "İsimler",
+    "difficulty": "medium"
+  },
+  {
+    "id": 11,
+    "english_word": "Send",
+    "turkish_meaning": "Göndermek",
+    "association_word": "Sende",
+    "mnemonic_sentence": "Bu mektubu SEND'e dedik, GÖNDER.",
+    "image_file": "card_11.jpg",
+    "category": "Fiiller",
+    "difficulty": "medium"
+  },
+  {
+    "id": 12,
+    "english_word": "Visit",
+    "turkish_meaning": "Ziyaret etmek",
+    "association_word": "Vizite",
+    "mnemonic_sentence": "VİZİTE ücreti için ZİYARET ETMEK istedim.",
+    "image_file": "card_12.jpg",
+    "category": "Fiiller",
+    "difficulty": "medium"
+  },
+  {
+    "id": 13,
+    "english_word": "Cut",
+    "turkish_meaning": "Kesmek",
+    "association_word": "Kat",
+    "mnemonic_sentence": "Saçımı 3 KAT KES. Öyle daha güzel görünür bence.",
+    "image_file": "card_13.jpg",
+    "category": "Fiiller",
+    "difficulty": "medium"
+  },
+  {
+    "id": 14,
+    "english_word": "Meet",
+    "turkish_meaning": "Buluşmak, toplanmak",
+    "association_word": "Mit",
+    "mnemonic_sentence": "MİT ajanları! Yeni BULUŞMA ve TOPLANMA yerimiz burası!",
+    "image_file": "card_14.jpg",
+    "category": "Fiiller",
+    "difficulty": "medium"
+  },
+  {
+    "id": 15,
+    "english_word": "Breakfast",
+    "turkish_meaning": "Kahvaltı",
+    "association_word": "Bırak Fıstık",
+    "mnemonic_sentence": "KAHVALTI süper. BIRAK FISTIK yemeyi de gel şunlardan ye!",
+    "image_file": "card_15.jpg",
+    "category": "İsimler",
+    "difficulty": "easy"
+  },
+  {
+    "id": 16,
+    "english_word": "Try",
+    "turkish_meaning": "Denemek",
+    "association_word": "Tır Ay",
+    "mnemonic_sentence": "TIR, AY altında güzel duruyor. Bunu tekrar DENEYELİM. İyi oldu.",
+    "image_file": "card_16.jpg",
+    "category": "Fiiller",
+    "difficulty": "medium"
+  },
+  {
+    "id": 17,
+    "english_word": "Catch",
+    "turkish_meaning": "Tutmak",
+    "association_word": "Keçi",
+    "mnemonic_sentence": "Şu inatçı KEÇİyi TUTMAK çok yordu bizi.",
+    "image_file": "card_17.jpg",
+    "category": "Fiiller",
+    "difficulty": "medium"
+  },
+  {
+    "id": 18,
+    "english_word": "Distance",
+    "turkish_meaning": "Mesafe",
+    "association_word": "Diz tınısı",
+    "mnemonic_sentence": "Hımmm! DİZ TINISI da MESAFE ayarlanırsa iyimiş!",
+    "image_file": "card_18.jpg",
+    "category": "İsimler",
+    "difficulty": "hard"
+  },
+  {
+    "id": 19,
+    "english_word": "Safe",
+    "turkish_meaning": "Kasa",
+    "association_word": "Seyfi",
+    "mnemonic_sentence": "SEYFİ söyle KASA nerede?!",
+    "image_file": "card_19.jpg",
+    "category": "İsimler",
+    "difficulty": "medium"
+  },
+  {
+    "id": 20,
+    "english_word": "Prize",
+    "turkish_meaning": "Ödül",
+    "association_word": "Priz",
+    "mnemonic_sentence": "PRİZE fişi taktın ve ÖDÜL artık senin!",
+    "image_file": "card_20.jpg",
+    "category": "İsimler",
+    "difficulty": "medium"
+  },
+  {
+    "id": 21,
+    "english_word": "Dark",
+    "turkish_meaning": "Koyu, Karanlık",
+    "association_word": "Dar ki",
+    "mnemonic_sentence": "Bu ev o kadar Dark ki içerisi Koyu ve Karanlık görünüyor.",
+    "image_file": "card_21.jpg",
+    "category": "Sıfatlar",
+    "difficulty": "medium"
+  },
+  {
+    "id": 22,
+    "english_word": "Dust",
+    "turkish_meaning": "Silmek",
+    "association_word": "Mop",
+    "mnemonic_sentence": "MOP ile yeri SİLMEK çok kolay.",
+    "image_file": "card_22.jpg",
+    "category": "Fiiller",
+    "difficulty": "easy"
+  },
+  {
+    "id": 23,
+    "english_word": "Crime",
+    "turkish_meaning": "Suç",
+    "association_word": "Kırayım",
+    "mnemonic_sentence": "Sakın camı KIRAYIM deme. Bu bir SUÇ! Ona göre!",
+    "image_file": "card_23.jpg",
+    "category": "İsimler",
+    "difficulty": "medium"
+  },
+  {
+    "id": 24,
+    "english_word": "Rush",
+    "turkish_meaning": "Acele etmek",
+    "association_word": "aRAŞtır",
+    "mnemonic_sentence": "ACELE ET ve aRAŞtır dediğim kitapları!",
+    "image_file": "card_24.jpg",
+    "category": "Fiiller",
+    "difficulty": "medium"
+  },
+  {
+    "id": 25,
+    "english_word": "Doubt",
+    "turkish_meaning": "Şüphe",
+    "association_word": "Davut",
+    "mnemonic_sentence": "En çok senden ŞÜPHE ediyorum DAVUT!",
+    "image_file": "card_25.jpg",
+    "category": "İsimler",
+    "difficulty": "medium"
+  },
+  {
+    "id": 26,
+    "english_word": "Doze",
+    "turkish_meaning": "Uyuklamak",
+    "association_word": "Doz",
+    "mnemonic_sentence": "Bu ilaçtan yüksek DOZ alırsan UYUKLAMAYA başlarsın!",
+    "image_file": "card_26.jpg",
+    "category": "Fiiller",
+    "difficulty": "medium"
+  },
+  {
+    "id": 27,
+    "english_word": "Shut",
+    "turkish_meaning": "Kapamak",
+    "association_word": "Şato",
+    "mnemonic_sentence": "ŞAT onun kapısını KAPATMALISIN!",
+    "image_file": "card_27.jpg",
+    "category": "Fiiller",
+    "difficulty": "medium"
+  },
+  {
+    "id": 28,
+    "english_word": "Raise",
+    "turkish_meaning": "Yükseltmek",
+    "association_word": "Reiss",
+    "mnemonic_sentence": "Bizi mevkiye YÜKSELTMEK sana yakışır REİSS!",
+    "image_file": "card_28.jpg",
+    "category": "Fiiller",
+    "difficulty": "medium"
+  },
+  {
+    "id": 29,
+    "english_word": "Chain",
+    "turkish_meaning": "Zincir",
+    "association_word": "Çin",
+    "mnemonic_sentence": "ZİNCİRİ en iyi yapan ülke gördüğün gibi ÇİN!",
+    "image_file": "card_29.jpg",
+    "category": "İsimler",
+    "difficulty": "medium"
+  },
+  {
+    "id": 30,
+    "english_word": "Gun",
+    "turkish_meaning": "Tabanca",
+    "association_word": "Ganimet",
+    "mnemonic_sentence": "Bırakın GANİMET benim. Karşı gelecek olan TABANCA'nın tadına bakar!",
+    "image_file": "card_30.jpg",
+    "category": "İsimler",
+    "difficulty": "medium"
+  },
+  {
+    "id": 31,
+    "english_word": "Answer",
+    "turkish_meaning": "Cevap",
+    "association_word": "Ensir",
+    "mnemonic_sentence": "Sana ENSIRlı CEVABI vereceğim birazdan!",
+    "image_file": "card_31.jpg",
+    "category": "İsimler",
+    "difficulty": "medium"
+  },
+  {
+    "id": 32,
+    "english_word": "Down",
+    "turkish_meaning": "Aşağı",
+    "association_word": "Down",
+    "mnemonic_sentence": "DOWN sendromlu olan gençler hadi AŞAĞI! İn bakalım!",
+    "image_file": "card_32.jpg",
+    "category": "Genel",
+    "difficulty": "easy"
+  },
+  {
+    "id": 33,
+    "english_word": "Same",
+    "turkish_meaning": "Aynı",
+    "association_word": "Sayım",
+    "mnemonic_sentence": "Sınıfı saydım. SAYIM önceki sayımız ile AYNI.",
+    "image_file": "card_33.jpg",
+    "category": "Sıfatlar",
+    "difficulty": "medium"
+  },
+  {
+    "id": 34,
+    "english_word": "Enough",
+    "turkish_meaning": "Yeterli",
+    "association_word": "İn af'fettim",
+    "mnemonic_sentence": "O elmalar YETERLİ. İN AF'fettim seni çocuk!",
+    "image_file": "card_34.jpg",
+    "category": "Sıfatlar",
+    "difficulty": "medium"
+  },
+  {
+    "id": 35,
+    "english_word": "Accompany",
+    "turkish_meaning": "Eşlik etmek",
+    "association_word": "ı'kampini",
+    "mnemonic_sentence": "John iş gezisinde babasına eşlik etti.",
+    "image_file": "card_35.jpg",
+    "category": "Fiiller",
+    "difficulty": "hard"
+  },
+  {
+    "id": 36,
+    "english_word": "Alter",
+    "turkish_meaning": "Değiştirmek",
+    "association_word": "Altını değiştir",
+    "mnemonic_sentence": "Baba, artık uymadığı için eski pantolonunu değiştirdi (altered).",
+    "image_file": "card_36.jpg",
+    "category": "Fiiller",
+    "difficulty": "medium"
+  },
+  {
+    "id": 37,
+    "english_word": "Job",
+    "turkish_meaning": "İş",
+    "association_word": "Cop",
+    "mnemonic_sentence": "Burada yapacağın tek İŞ COP dağıtmak olacak!",
+    "image_file": "card_37.jpg",
+    "category": "İsimler",
+    "difficulty": "medium"
+  },
+  {
+    "id": 38,
+    "english_word": "Also",
+    "turkish_meaning": "Ayrıca, de, da",
+    "association_word": "Olsa",
+    "mnemonic_sentence": "Defter alayım. AYRICA kalem DE ve açacak DA OLSA iyi olur!",
+    "image_file": "card_38.jpg",
+    "category": "Genel",
+    "difficulty": "medium"
+  },
+  {
+    "id": 39,
+    "english_word": "Away",
+    "turkish_meaning": "Uzakta",
+    "association_word": "E veya",
+    "mnemonic_sentence": "UZAKTA biraz E VEYa D blokların orada.",
+    "image_file": "card_39.jpg",
+    "category": "Genel",
+    "difficulty": "medium"
+  },
+  {
+    "id": 40,
+    "english_word": "Use",
+    "turkish_meaning": "Kullanmak",
+    "association_word": "Yüz",
+    "mnemonic_sentence": "Bu kremin KULLANIM alanı sadece YÜZ'dür. Dikkat ediniz!",
+    "image_file": "card_40.jpg",
+    "category": "Fiiller",
+    "difficulty": "medium"
+  },
+  {
+    "id": 41,
+    "english_word": "Show",
+    "turkish_meaning": "Göstermek",
+    "association_word": "Şov",
+    "mnemonic_sentence": "ŞOV'unu GÖSTER hadi!",
+    "image_file": "card_41.jpg",
+    "category": "Fiiller",
+    "difficulty": "easy"
+  },
+  {
+    "id": 42,
+    "english_word": "Bread",
+    "turkish_meaning": "Ekmek",
+    "association_word": "Bir ekmek",
+    "mnemonic_sentence": "İşte! BİR EKMEK! Vay, kocaman BREAD!",
+    "image_file": "card_42.jpg",
+    "category": "İsimler",
+    "difficulty": "easy"
+  },
+  {
+    "id": 43,
+    "english_word": "Chair",
+    "turkish_meaning": "Sandalye",
+    "association_word": "Çayır",
+    "mnemonic_sentence": "ÇAYIRDA CHAIR? Neden olmasın!",
+    "image_file": "card_43.jpg",
+    "category": "İsimler",
+    "difficulty": "medium"
+  },
+  {
+    "id": 44,
+    "english_word": "Tooth",
+    "turkish_meaning": "Diş",
+    "association_word": "Too diş",
+    "mnemonic_sentence": "TOOTH = Too diş (çok diş)!",
+    "image_file": "card_44.jpg",
+    "category": "İsimler",
+    "difficulty": "easy"
+  },
+  {
+    "id": 45,
+    "english_word": "Milk",
+    "turkish_meaning": "Süt",
+    "association_word": "Melk",
+    "mnemonic_sentence": "Ben bir MELK'im! Bol bol MİLK içiyorum.",
+    "image_file": "card_45.jpg",
+    "category": "İsimler",
+    "difficulty": "easy"
+  },
+  {
+    "id": 46,
+    "english_word": "Boil",
+    "turkish_meaning": "Kaynamak",
+    "association_word": "Bu yıl",
+    "mnemonic_sentence": "BU YIL sıcaktan KAYNADIK.",
+    "image_file": "card_46.jpg",
+    "category": "Fiiller",
+    "difficulty": "medium"
+  },
+  {
+    "id": 47,
+    "english_word": "Dust",
+    "turkish_meaning": "Tozunu almak",
+    "association_word": "Dost",
+    "mnemonic_sentence": "Kitap DOSTumuzdur. TOZUNU ALALIM..",
+    "image_file": "card_47.jpg",
+    "category": "Fiiller",
+    "difficulty": "easy"
+  },
+  {
+    "id": 48,
+    "english_word": "Chicken",
+    "turkish_meaning": "Tavuk",
+    "association_word": "Çıkın",
+    "mnemonic_sentence": "ÇIKIN TAVUK gelsin. Ona yol verin.",
+    "image_file": "card_48.jpg",
+    "category": "İsimler",
+    "difficulty": "easy"
+  },
+  {
+    "id": 49,
+    "english_word": "Father",
+    "turkish_meaning": "Baba",
+    "association_word": "FA'dır",
+    "mnemonic_sentence": "BABA bu FA'dır...",
+    "image_file": "card_49.jpg",
+    "category": "İsimler",
+    "difficulty": "easy"
+  },
+  {
+    "id": 50,
+    "english_word": "Cover",
+    "turkish_meaning": "Örtmek",
+    "association_word": "Kavur",
+    "mnemonic_sentence": "KAVURmayı önce güzelce KAVUR ve sonra üzerini ÖRT! Hepsi bu!",
+    "image_file": "card_50.jpg",
+    "category": "Fiiller",
+    "difficulty": "medium"
+  },
+  {
+    "id": 51,
+    "english_word": "Town",
+    "turkish_meaning": "Kasaba",
+    "association_word": "Tavan",
+    "mnemonic_sentence": "KASABAda TAVANı akan tek ev burası!",
+    "image_file": "card_51.jpg",
+    "category": "İsimler",
+    "difficulty": "medium"
+  },
+  {
+    "id": 52,
+    "english_word": "Rest",
+    "turkish_meaning": "Dinlenmek",
+    "association_word": "Rest",
+    "mnemonic_sentence": "REST çekiyorum. Çalışmıycam, DİNLENME zamanı bundan sonra.",
+    "image_file": "card_52.jpg",
+    "category": "Fiiller",
+    "difficulty": "easy"
+  },
+  {
+    "id": 53,
+    "english_word": "Hide",
+    "turkish_meaning": "Saklamak",
+    "association_word": "Haydi",
+    "mnemonic_sentence": "HAYDİ kasaları SAKLAMAK için ne bekliyorsunuz!",
+    "image_file": "card_53.jpg",
+    "category": "Fiiller",
+    "difficulty": "medium"
+  },
+  {
+    "id": 54,
+    "english_word": "Never",
+    "turkish_meaning": "Asla",
+    "association_word": "Ne var",
+    "mnemonic_sentence": "NE VAR! Para mı istiyorsun? ASLA! Sadece biraz sohbet edelim istedim.",
+    "image_file": "card_54.jpg",
+    "category": "Genel",
+    "difficulty": "medium"
+  },
+  {
+    "id": 55,
+    "english_word": "Cynical",
+    "turkish_meaning": "Eleştirel",
+    "association_word": "Sinek al",
+    "mnemonic_sentence": "ELEŞTİREL olmayı bırakta şu düğmeye bas ve biraz SİNEK AL!",
+    "image_file": "card_55.jpg",
+    "category": "Sıfatlar",
+    "difficulty": "hard"
+  },
+  {
+    "id": 56,
+    "english_word": "Why",
+    "turkish_meaning": "Neden",
+    "association_word": "Vay",
+    "mnemonic_sentence": "VAY! Elmayı NEDEN merdivene çıkıp toplamıyorsun!",
+    "image_file": "card_56.jpg",
+    "category": "Genel",
+    "difficulty": "easy"
+  },
+  {
+    "id": 57,
+    "english_word": "Wide",
+    "turkish_meaning": "Geniş",
+    "association_word": "Vay dede",
+    "mnemonic_sentence": "WAY DEDE bu şalvar çok GENİŞ!",
+    "image_file": "card_57.jpg",
+    "category": "Sıfatlar",
+    "difficulty": "medium"
+  },
+  {
+    "id": 58,
+    "english_word": "Easy",
+    "turkish_meaning": "Kolay",
+    "association_word": "İzi",
+    "mnemonic_sentence": "Büyüteç ile bu İZİ takip etmek çok KOLAY!",
+    "image_file": "card_58.jpg",
+    "category": "Sıfatlar",
+    "difficulty": "easy"
+  },
+  {
+    "id": 59,
+    "english_word": "Box",
+    "turkish_meaning": "Kutu",
+    "association_word": "Boks",
+    "mnemonic_sentence": "Bu BOKS maçı KUTU fırlatmak yasak!",
+    "image_file": "card_59.jpg",
+    "category": "İsimler",
+    "difficulty": "easy"
+  },
+  {
+    "id": 60,
+    "english_word": "Out",
+    "turkish_meaning": "Dışarı",
+    "association_word": "Out",
+    "mnemonic_sentence": "Top DIŞARI çıktı OUT!",
+    "image_file": "card_60.jpg",
+    "category": "Genel",
+    "difficulty": "easy"
+  },
+  {
+    "id": 61,
+    "english_word": "Dinner",
+    "turkish_meaning": "Akşam yemeği",
+    "association_word": "Diner",
+    "mnemonic_sentence": "Karnım acıktı ve gurulduyor! Birazdan AKŞAM YEMEĞİ yediğinde DİNER o guruldama!",
+    "image_file": "card_61.jpg",
+    "category": "İsimler",
+    "difficulty": "medium"
+  },
+  {
+    "id": 62,
+    "english_word": "Table",
+    "turkish_meaning": "Masa",
+    "association_word": "Teyibi al",
+    "mnemonic_sentence": "TEYİBİ AL! Bak MASA'nın hemen üzerinde!",
+    "image_file": "card_62.jpg",
+    "category": "İsimler",
+    "difficulty": "easy"
+  },
+  {
+    "id": 63,
+    "english_word": "Bus",
+    "turkish_meaning": "Otobüs",
+    "association_word": "Bas",
+    "mnemonic_sentence": "OTOBÜS'ten inmek için lütfen düğmeye BAS!",
+    "image_file": "card_63.jpg",
+    "category": "İsimler",
+    "difficulty": "easy"
+  },
+  {
+    "id": 64,
+    "english_word": "Narrow",
+    "turkish_meaning": "Dar",
+    "association_word": "Narı ov",
+    "mnemonic_sentence": "Al şu NARI OV, iyi gelir DAR giysiden sonra! Rahatlarsın.",
+    "image_file": "card_64.jpg",
+    "category": "Sıfatlar",
+    "difficulty": "hard"
+  },
+  {
+    "id": 65,
+    "english_word": "Bet",
+    "turkish_meaning": "Bahse girmek",
+    "association_word": "Beti",
+    "mnemonic_sentence": "BETİ gel seninle BAHSE GİRELİM!",
+    "image_file": "card_65.jpg",
+    "category": "Fiiller",
+    "difficulty": "medium"
+  }
+]
