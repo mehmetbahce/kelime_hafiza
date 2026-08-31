@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/word_card.dart';
 import '../data/card_loader.dart';
 import '../widgets/word_card_tile.dart';
+import '../services/rewarded_ad_service.dart';
 import 'flashcard_screen.dart';
 import 'quiz_screen.dart';
 
@@ -74,6 +75,28 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('Kelime Hafıza (${groups.length} kart, ${_allCards.length} kelime)',
             style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13)),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.ondemand_video_outlined),
+            tooltip: 'Reklam izle',
+            onPressed: () {
+              RewardedAdService().show(
+                onReward: () {
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Reklamı izlediğin için teşekkürler! 🎉')),
+                    );
+                  }
+                },
+                onNotReady: () {
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Reklam hazırlanıyor, birazdan tekrar dene.')),
+                    );
+                  }
+                },
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.school_outlined),
             tooltip: 'Tekrar Modu',
