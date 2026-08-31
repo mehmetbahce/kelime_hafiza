@@ -79,22 +79,30 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: const Icon(Icons.ondemand_video_outlined),
             tooltip: 'Reklam izle',
             onPressed: () {
-              RewardedAdService().show(
-                onReward: () {
-                  if (mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Reklamı izlediğin için teşekkürler! 🎉')),
-                    );
-                  }
-                },
-                onNotReady: () {
-                  if (mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Reklam hazırlanıyor, birazdan tekrar dene.')),
-                    );
-                  }
-                },
-              );
+              try {
+                RewardedAdService().show(
+                  onReward: () {
+                    if (mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Reklamı izlediğin için teşekkürler! 🎉')),
+                      );
+                    }
+                  },
+                  onNotReady: () {
+                    if (mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Reklam hazırlanıyor, birazdan tekrar dene.')),
+                      );
+                    }
+                  },
+                );
+              } catch (_) {
+                if (mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Reklam şu an kullanılamıyor.')),
+                  );
+                }
+              }
             },
           ),
           IconButton(

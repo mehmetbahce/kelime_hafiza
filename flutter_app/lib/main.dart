@@ -6,8 +6,17 @@ import 'services/rewarded_ad_service.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize().then((_) => RewardedAdService().preload());
   runApp(const KelimeHafizaApp());
+  // Reklam başlatma, uygulama açıldıktan SONRA ve korumalı şekilde yapılıyor.
+  // Bir sorun çıkarsa uygulamanın geri kalanını etkilemez, sadece reklam çalışmaz.
+  Future.microtask(() async {
+    try {
+      await MobileAds.instance.initialize();
+      RewardedAdService().preload();
+    } catch (_) {
+      // Reklam sistemi başlatılamadı, uygulama normal çalışmaya devam eder.
+    }
+  });
 }
 
 class KelimeHafizaApp extends StatelessWidget {

@@ -4,12 +4,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 /// ÖNEMLİ: Şu an Google'ın RESMİ TEST reklam birimi ID'si kullanılıyor.
 /// Gerçek para/tıklama üretmez, sadece geliştirme sırasında reklamın
 /// gerçekten çalıştığını görmek için Google tarafından sağlanır.
-///
-/// Gerçek reklamlara geçmek için:
-/// 1) AdMob hesabı aç, uygulamanı ekle, "Ödüllü Reklam" (Rewarded Ad) birimi oluştur.
-/// 2) Aşağıdaki test ID sabitini kendi ID'inle değiştir.
-/// 3) android/app/src/main/AndroidManifest.xml içindeki test APPLICATION_ID'yi
-///    de kendi gerçek uygulama ID'inle değiştir (workflow dosyasında otomatik ekleniyor).
 class RewardedAdService {
   static final RewardedAdService _instance = RewardedAdService._internal();
   factory RewardedAdService() => _instance;
