@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/word_card.dart';
 import '../data/card_loader.dart';
 import '../widgets/word_card_tile.dart';
+import '../services/rewarded_ad_service.dart';
 import 'flashcard_screen.dart';
 import 'quiz_screen.dart';
 
@@ -14,6 +15,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // Sunucusuz mod: kartlar assets/data/cards.json'dan yüklenir (500 karta kadar
   // aynı şekilde çalışır, kod içinde tek tek yazılı kart yok).
+  static const int _groupSize = 5; // her galeri kutucuğu bu kadar kelime içerir
+
   List<WordCard> _allCards = [];
   bool _loading = true;
   int? _selectedCategoryIndex; // null = Tümü
@@ -47,6 +50,16 @@ class _HomeScreenState extends State<HomeScreen> {
     }).toList();
   }
 
+  /// Filtrelenmiş kelimeleri 5'erli gruplara böler — her grup bir galeri
+  /// kutucuğu olur, dokununca içindeki kelimeler kaydırmalı açılır.
+  List<List<WordCard>> _grouped(List<WordCard> cards) {
+    final groups = <List<WordCard>>[];
+    for (var i = 0; i < cards.length; i += _groupSize) {
+      groups.add(cards.sublist(i, i + _groupSize > cards.length ? cards.length : i + _groupSize));
+    }
+    return groups;
+  }
+
   List<String> get _categoryNames =>
       _allCards.map((c) => c.categoryName).whereType<String>().toSet().toList()..sort();
 
@@ -56,11 +69,34 @@ class _HomeScreenState extends State<HomeScreen> {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
     final cards = _filtered;
+    final groups = _grouped(cards);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kelime Hafıza (${_allCards.length} kart)',
-            style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
+        title: Text('Kelime Hafıza (${groups.length} kart, ${_allCards.length} kelime)',
+            style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13)),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.ondemand_video_outlined),
+            tooltip: 'Reklam izle',
+            onPressed: () {
+              RewardedAdService().show(
+                onReward: () {
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Reklamı izlediğin için teşekkürler! 🎉')),
+                    );
+                  }
+                },
+                onNotReady: () {
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Reklam hazırlanıyor, birazdan tekrar dene.')),
+                    );
+                  }
+                },
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.school_outlined),
             tooltip: 'Tekrar Modu',
@@ -79,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           _buildSearchBar(),
           _buildCategoryChips(),
-          Expanded(child: _buildBody(cards)),
+          Expanded(child: _buildBody(groups)),
         ],
       ),
     );
@@ -128,8 +164,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildBody(List<WordCard> cards) {
-    if (cards.isEmpty) {
+  Widget _buildBody(List<List<WordCard>> groups) {
+    if (groups.isEmpty) {
       return const Center(child: Text('Aramanla eşleşen kart yok.'));
     }
     return GridView.builder(
@@ -137,8 +173,8 @@ class _HomeScreenState extends State<HomeScreen> {
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2, mainAxisSpacing: 12, crossAxisSpacing: 12, childAspectRatio: 0.8,
       ),
-      itemCount: cards.length,
-      itemBuilder: (_, i) => WordCardTile(card: cards[i], onChanged: () => setState(() {})),
+      itemCount: groups.length,
+      itemBuilder: (_, i) => WordCardTile(group: groups[i], onChanged: () => setState(() {})),
     );
   }
 }
